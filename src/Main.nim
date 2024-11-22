@@ -1,13 +1,18 @@
-import year2023/Day1Mod
-import year2023/Day2Mod
-import year2023/Day3Mod
-import year2023/Day3Mod_Part2
-import year2023/Day4Mod
-import year2023/Day4Mod_Part2
-import year2023/Day5Mod
-import year2023/Day5Mod_Part2
-import year2023/Day6Mod
-import year2023/Day6Mod_Part2
+import Year2020/Year2020_Day1Mod_Part1
+import Year2020/Year2020_Day1Mod_Part2
+import Year2020/Year2020_Day2Mod_Part1
+import Year2020/Year2020_Day2Mod_Part2
+
+import Year2023/Year2023_Day1Mod
+import Year2023/Year2023_Day2Mod
+import Year2023/Year2023_Day3Mod
+import Year2023/Year2023_Day3Mod_Part2
+import Year2023/Year2023_Day4Mod
+import Year2023/Year2023_Day4Mod_Part2
+import Year2023/Year2023_Day5Mod
+import Year2023/Year2023_Day5Mod_Part2
+import Year2023/Year2023_Day6Mod
+import Year2023/Year2023_Day6Mod_Part2
 
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, terminal
 
@@ -40,30 +45,38 @@ when isMainModule:
     var startTimeDT = now()
 
     case consoleInput:
+        of "2020 1 1":
+            echo "Day1Part1 " & $Year2020_Day1Mod_Part1.ReportRepair(os.getcurrentdir() & "\\inputFiles\\2020\\day1.txt")
+        of "2020 1 2":
+            echo "Day1Part2 " & $Year2020_Day1Mod_Part2.ReportRepair(os.getcurrentdir() & "\\inputFiles\\2020\\day1.txt")
+        of "2020 2 1":
+            echo "Day2Part1 " & $Year2020_Day2Mod_Part1.PasswordPhilosphy(os.getcurrentdir() & "\\inputFiles\\2020\\day2.txt")
+        of "2020 2 2":
+            echo "Day2Part2 " & $Year2020_Day2Mod_Part2.PasswordPhilosphy(os.getcurrentdir() & "\\inputFiles\\2020\\day2.txt")
         of "2023 1 1":
-            echo "Day1Part1 " & $Day1Mod.TrebuchetPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt") 
+            echo "Day1Part1 " & $Year2023_Day1Mod.TrebuchetPart(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt") 
         of "2023 1 2":
-            echo "Day1Part2 " & $Day1Mod.TrebuchetPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt")
+            echo "Day1Part2 " & $Year2023_Day1Mod.TrebuchetPart(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt")
         of "2023 2 1":
-            echo "Day2Part1 " & $Day2Mod.CubeConundrumPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
+            echo "Day2Part1 " & $Year2023_Day2Mod.CubeConundrumPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
         of "2023 2 2":
-            echo "Day2Part2 " & $Day2Mod.CubeConundrumPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
+            echo "Day2Part2 " & $Year2023_Day2Mod.CubeConundrumPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
         of "2023 3 1":
-            echo "Day3Part1 " & $Day3Mod.GearRatioPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
+            echo "Day3Part1 " & $Year2023_Day3Mod.GearRatioPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
         of "2023 3 2":
-            echo "Day3Part2 " & $Day3Mod_Part2.GearRatioPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
+            echo "Day3Part2 " & $Year2023_Day3Mod_Part2.GearRatioPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
         of "2023 4 1":
-            echo "Day4Part1" & $Day4Mod.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
+            echo "Day4Part1" & $Year2023_Day4Mod.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
         of "2023 4 2":
-            echo "Day4Part2 " & $Day4Mod_Part2.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
+            echo "Day4Part2 " & $Year2023_Day4Mod_Part2.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
         of "2023 5 1":
-            echo "Day5Part1 " & $Day5Mod.IfYouGiveASeedAFertilizer(os.getCurrentDir() & "\\inputFiles\\2023\\day5.txt")
+            echo "Day5Part1 " & $Year2023_Day5Mod.IfYouGiveASeedAFertilizer(os.getCurrentDir() & "\\inputFiles\\2023\\day5.txt")
         of "2023 5 2":
-            echo "Day5Part2 " & $Day5Mod_Part2.IfYouGiveASeedAFertilizer(os.getCurrentDir() & "\\inputFiles\\2023\\day5.txt")
+            echo "Day5Part2 " & $Year2023_Day5Mod_Part2.IfYouGiveASeedAFertilizer(os.getCurrentDir() & "\\inputFiles\\2023\\day5.txt")
         of "2023 6 1":
-            echo "Day6Part1 " & $Day6Mod.WaitForIt(os.getCurrentDir() & "\\inputFiles\\2023\\day6.txt")
+            echo "Day6Part1 " & $Year2023_Day6Mod.WaitForIt(os.getCurrentDir() & "\\inputFiles\\2023\\day6.txt")
         of "2023 6 2":
-            echo "Day6Part2 " & $Day6Mod_Part2.WaitForIt(os.getCurrentDir() & "\\inputFiles\\2023\\day6.txt")
+            echo "Day6Part2 " & $Year2023_Day6Mod_Part2.WaitForIt(os.getCurrentDir() & "\\inputFiles\\2023\\day6.txt")
         else:
             echo "Unknown ID for what to run"
 

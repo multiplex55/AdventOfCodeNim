@@ -1,7 +1,7 @@
 # https://adventofcode.com/2023/day/1
 import strutils, strformat, streams, os, times, tables
 
-proc TrebuchetPart1*(fileName: string): int =
+proc TrebuchetPart*(fileName: string): int =
     var
         sum = 0
         fileStrm = openfilestream(fileName, fmRead)
@@ -45,7 +45,7 @@ proc TableContainsKeyParseInt*(tableToSearch: Table[string, int],
             return value
     return 0
 
-proc TrebuchetPart2*(fileName: string): int =
+proc TrebuchetPart*(fileName: string): int =
 
     var outputDebug = newFileStream("DEBUG_OUTPUT.txt", fmWrite)
     defer: outputDebug.close()
