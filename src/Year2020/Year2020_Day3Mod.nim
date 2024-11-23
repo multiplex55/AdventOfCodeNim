@@ -1,7 +1,7 @@
-import strutils, strformat, streams, os, times, tables, sequtils, algorithm,math
+import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
 proc TobogganTrajectory*(fileName: string): int =
-    const 
+    const
         SLOPE_Y_DOWN = 1
         SLOPE_X_RIGHT = 3
         TREE_CHAR = "#"
@@ -14,9 +14,8 @@ proc TobogganTrajectory*(fileName: string): int =
         inputSeq: seq[string]
         currentYPos = 0
         currentXPos = 0
-        
-    defer: fileStrm.close()
 
+    defer: fileStrm.close()
 
     for line in fileStrm.lines:
         inputSeq.add(line)
@@ -27,7 +26,7 @@ proc TobogganTrajectory*(fileName: string): int =
             modulatedXPos = floorMod(currentXPos, currentInputSeqRow.len())
         else:
             modulatedXPos = currentXPos
-        
+
         var charAtPos = currentInputSeqRow[modulatedXPos]
         if $charAtPos == TREE_CHAR:
             answer += 1
