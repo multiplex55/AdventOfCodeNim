@@ -2,6 +2,7 @@ import Year2020/Year2020_Day1Mod
 import Year2020/Year2020_Day1Mod_Part2
 import Year2020/Year2020_Day2Mod
 import Year2020/Year2020_Day2Mod_Part2
+import Year2020/Year2020_Day3Mod
 
 import Year2023/Year2023_Day1Mod
 import Year2023/Year2023_Day1Mod_Part2
@@ -19,10 +20,21 @@ import Year2023/Year2023_Day6Mod_Part2
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, terminal
 
 when isMainModule:
+    
+    echo "Day3Part1 " & $Year2020_Day3Mod.TobogganTrajectory(os.getcurrentdir() & "\\inputFiles\\2020\\day3.txt")
+    quit()
+
+
     # There is probably a better way to do all this
     # TODO later on
     echo "Which function do you want to run?\n"
     var AVAILABLE_FUNCTIONS_TO_RUN = @[
+        "2020 1 1 -> Day 1 2020 Part 1",
+        "2020 1 2 -> Day 1 2020 Part 2",
+        "2020 2 1 -> Day 2 2020 Part 1",
+        "2020 2 2 -> Day 2 2020 Part 2",
+        "2020 3 1 -> Day 3 2020 Part 1",
+
         "2023 1 1 -> Day 1 2023 Part 1",
         "2023 1 2 -> Day 1 2023 Part 2",
         "2023 2 1 -> Day 2 2023 Part 1",
@@ -57,8 +69,14 @@ when isMainModule:
             echo "Day2Part1 " & $Year2020_Day2Mod.PasswordPhilosphy(os.getcurrentdir() & "\\inputFiles\\2020\\day2.txt")
         of "2020 2 2":
             echo "Day2Part2 " & $Year2020_Day2Mod_Part2.PasswordPhilosphy(os.getcurrentdir() & "\\inputFiles\\2020\\day2.txt")
+        of "2020 3 1":
+            echo "Day3Part1 " & $Year2020_Day3Mod.TobogganTrajectory(os.getcurrentdir() & "\\inputFiles\\2020\\day3.txt")
+
+
+
+
         of "2023 1 1":
-            echo "Day1Part1 " & $Year2023_Day1Mod.TrebuchetPart(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt") 
+            echo "Day1Part1 " & $Year2023_Day1Mod.Trebuchet(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt") 
         of "2023 1 2":
             echo "Day1Part2 " & $Year2023_Day1Mod_Part2.Trebuchet(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt")
         of "2023 2 1":
