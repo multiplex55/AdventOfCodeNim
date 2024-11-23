@@ -45,7 +45,7 @@ proc TableContainsKeyParseInt*(tableToSearch: Table[string, int],
             return value
     return 0
 
-proc TrebuchetPart*(fileName: string): int =
+proc Trebuchet*(fileName: string): int =
 
     var outputDebug = newFileStream("DEBUG_OUTPUT.txt", fmWrite)
     defer: outputDebug.close()

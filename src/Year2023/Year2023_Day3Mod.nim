@@ -237,7 +237,7 @@ proc CheckForNumbers(engineSchematic: seq[seq[string]], originalRowIndex: int,
         echo &"{mc}"
     return mergedCells
 
-proc GearRatioPart1*(fileName: string): int =
+proc GearRatio*(fileName: string): int =
     var
         sum = 0
         fileStrm = openfilestream(fileName, fmRead)

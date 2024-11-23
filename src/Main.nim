@@ -5,6 +5,7 @@ import Year2020/Year2020_Day2Mod_Part2
 
 import Year2023/Year2023_Day1Mod
 import Year2023/Year2023_Day2Mod
+import Year2023/Year2023_Day2Mod_Part2
 import Year2023/Year2023_Day3Mod
 import Year2023/Year2023_Day3Mod_Part2
 import Year2023/Year2023_Day4Mod
@@ -58,15 +59,15 @@ when isMainModule:
         of "2023 1 2":
             echo "Day1Part2 " & $Year2023_Day1Mod.TrebuchetPart(os.getCurrentDir() & "\\inputFiles\\2023\\day1.txt")
         of "2023 2 1":
-            echo "Day2Part1 " & $Year2023_Day2Mod.CubeConundrumPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
+            echo "Day2Part1 " & $Year2023_Day2Mod.CubeConundrum(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
         of "2023 2 2":
-            echo "Day2Part2 " & $Year2023_Day2Mod.CubeConundrumPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
+            echo "Day2Part2 " & $Year2023_Day2Mod_Part2.CubeConundrum(os.getCurrentDir() & "\\inputFiles\\2023\\day2.txt")
         of "2023 3 1":
-            echo "Day3Part1 " & $Year2023_Day3Mod.GearRatioPart1(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
+            echo "Day3Part1 " & $Year2023_Day3Mod.GearRatio(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
         of "2023 3 2":
-            echo "Day3Part2 " & $Year2023_Day3Mod_Part2.GearRatioPart2(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
+            echo "Day3Part2 " & $Year2023_Day3Mod_Part2.GearRatio(os.getCurrentDir() & "\\inputFiles\\2023\\day3.txt")
         of "2023 4 1":
-            echo "Day4Part1" & $Year2023_Day4Mod.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
+            echo "Day4Part1 " & $Year2023_Day4Mod.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
         of "2023 4 2":
             echo "Day4Part2 " & $Year2023_Day4Mod_Part2.Scratchcards(os.getCurrentDir() & "\\inputFiles\\2023\\day4.txt")
         of "2023 5 1":
