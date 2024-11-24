@@ -96,6 +96,10 @@
                 "-d:release",
                 "-r",
                 "--out:bin/${fileBasenameNoExtension}",
+                "--stacktrace:on",
+                "--lineTrace:on",
+                "--threads:on",
+                "--checks:on",
                 "src/Main.nim",
             ],
             "group": {
