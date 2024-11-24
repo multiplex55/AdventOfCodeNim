@@ -1,12 +1,12 @@
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
-proc doesTableContainAllValidKeys(passportTable: Table[string,string], passportValidKeys: seq[string]) : bool = 
+func doesTableContainAllValidKeys(passportTable: Table[string,string], passportValidKeys: seq[string]) : bool = 
     for ppvk in passportValidKeys:
         if not passportTable.hasKey(ppvk):
             return false
     return true
 
-proc validatePassportTableWithValidKeys(passportTable: seq[Table[string,string]], passportValidKeys: seq[string]) : int = 
+func validatePassportTableWithValidKeys(passportTable: seq[Table[string,string]], passportValidKeys: seq[string]) : int = 
     var answer: int
 
     for pt in passportTable:
