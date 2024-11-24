@@ -1,21 +1,19 @@
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
+proc doesTableContainAllValidKeys(passportTable: Table[string,string], passportValidKeys: seq[string]) : bool = 
+    for ppvk in passportValidKeys:
+        if not passportTable.hasKey(ppvk):
+            return false
+    return true
 
-func groupInputSequenceByBlank(inputSeq: seq[string]): seq[string] =
-    var 
-        returnSeq: seq[seq[string]]
-        activeSeq: seq[string]
+proc validatePassportTableWithValidKeys(passportTable: seq[Table[string,string]], passportValidKeys: seq[string]) : int = 
+    var answer: int
 
-    for line in inputSeq:
-        if not line.isEmptyOrWhitespace():
-            activeSeq.add(line)
-        else:
-            returnSeq.add(activeSeq)
-            activeSeq.setLen(0)
-
-    returnSeq.add(activeSeq)
-    activeSeq = returnSeq.mapIt(it.join(" "))
-    activeSeq
+    for pt in passportTable:
+        var validKeys = doesTableContainAllValidKeys(pt, passportValidKeys)
+        if validKeys:
+            answer += 1
+    answer 
 
 func splitPassportIntoKVPairs(inputString: string) : Table[string,string] = 
     var retTable: Table[string,string]
@@ -32,21 +30,22 @@ func createPassportTableFromGroupedInput(groupedInputSequence: seq[string]) : se
         var currentTable = splitPassportIntoKVPairs(row)
         returnTables.add(currentTable) 
     returnTables
+    
+func groupInputSequenceByBlank(inputSeq: seq[string]): seq[string] =
+    var 
+        returnSeq: seq[seq[string]]
+        activeSeq: seq[string]
 
-proc doesTableContainAllValidKeys(passportTable: Table[string,string], passportValidKeys: seq[string]) : bool = 
-    for ppvk in passportValidKeys:
-        if not passportTable.hasKey(ppvk):
-            return false
-    return true
+    for line in inputSeq:
+        if not line.isEmptyOrWhitespace():
+            activeSeq.add(line)
+        else:
+            returnSeq.add(activeSeq)
+            activeSeq.setLen(0)
 
-proc validatePassportTableWithValidKeys(passportTable: seq[Table[string,string]], passportValidKeys: seq[string]) : int = 
-    var answer: int
-
-    for pt in passportTable:
-        var validKeys = doesTableContainAllValidKeys(pt, passportValidKeys)
-        if validKeys:
-            answer += 1
-    answer 
+    returnSeq.add(activeSeq)
+    activeSeq = returnSeq.mapIt(it.join(" "))
+    activeSeq
 
 proc getInputFromFile(fileName:string) : seq[string] =
     var 
