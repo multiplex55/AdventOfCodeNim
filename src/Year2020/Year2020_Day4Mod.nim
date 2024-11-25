@@ -59,9 +59,8 @@ proc getInputFromFile(fileName:string) : seq[string] =
     inputSeq
 
 proc PassportProcessing*(fileName: string): int =
-    let passportValidKeys = @["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
-
     let 
+        passportValidKeys = @["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
         groupedInputSequence = groupInputSequenceByBlank(getInputFromFile(fileName))
         passportTable = createPassportTableFromGroupedInput(groupedInputSequence)
     var answer = validatePassportTableWithValidKeys(passportTable, passportValidKeys)
