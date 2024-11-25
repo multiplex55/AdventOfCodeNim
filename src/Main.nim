@@ -6,6 +6,7 @@ import Year2020/Year2020_Day2Mod_Part2
 import Year2020/Year2020_Day3Mod
 import Year2020/Year2020_Day3Mod_Part2
 import Year2020/Year2020_Day4Mod
+import Year2020/Year2020_Day4Mod_Part2
 
 import Year2023/Year2023_Day1Mod
 import Year2023/Year2023_Day1Mod_Part2
@@ -28,9 +29,6 @@ proc getDayInputFile(year: string, day: string): string =
     retPath
 
 when isMainModule:
-
-    # echo $Year2020_Day4Mod.PassportProcessing(getDayInputFile("2020","4"))
-    # quit()
 
     # There is probably a better way to do all this
     # TODO later on
@@ -91,6 +89,8 @@ when isMainModule:
             echo $Year2020_Day3Mod_Part2.TobogganTrajectory(inputFilePath)
         of "2020 4 1":
             echo $Year2020_Day4Mod.PassportProcessing(inputFilePath)
+        of "2020 4 2":
+            echo $Year2020_Day4Mod_Part2.PassportProcessing(inputFilePath)
 
         of "2023 1 1":
             echo $Year2023_Day1Mod.Trebuchet(inputFilePath)

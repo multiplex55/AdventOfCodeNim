@@ -95,7 +95,7 @@
                 "cpp",
                 "-d:release",
                 "-r",
-                "--out:bin/${fileBasenameNoExtension}",
+                "--out:bin/Main.exe",
                 "--stacktrace:on",
                 "--lineTrace:on",
                 "--threads:on",
@@ -116,7 +116,7 @@
                 "cpp",
                 "-d:release",
                 "-r",
-                "--out:bin/${fileBasenameNoExtension}",
+                "--out:bin/Main.exe",
                 "src/Main.nim",
                 ">",
                 "output_debug.txt"
@@ -128,7 +128,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Run Nim Pretty",
+            "label": "pp : Run Nim Pretty",
             "type": "shell",
             "command": "nimpretty",
             "args": [
