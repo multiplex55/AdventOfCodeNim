@@ -7,6 +7,8 @@ import Year2020/Year2020_Day3Mod
 import Year2020/Year2020_Day3Mod_Part2
 import Year2020/Year2020_Day4Mod
 import Year2020/Year2020_Day4Mod_Part2
+import Year2020/Year2020_Day5Mod
+import Year2020/Year2020_Day5Mod_Part2
 
 import Year2023/Year2023_Day1Mod
 import Year2023/Year2023_Day1Mod_Part2
@@ -41,6 +43,7 @@ when isMainModule:
         "2020 3 1 -> Day 3 2020 Part 1",
         "2020 3 2 -> Day 3 2020 Part 2",
         "2020 4 1 -> Day 4 2020 Part 1",
+        "2020 4 2 -> Day 4 2020 Part 2",
 
         "2023 1 1 -> Day 1 2023 Part 1",
         "2023 1 2 -> Day 1 2023 Part 2",
@@ -91,6 +94,10 @@ when isMainModule:
             echo $Year2020_Day4Mod.PassportProcessing(inputFilePath)
         of "2020 4 2":
             echo $Year2020_Day4Mod_Part2.PassportProcessing(inputFilePath)
+        of "2020 5 1":
+            echo $Year2020_Day5Mod.BinaryBoarding(inputFilePath)
+        of "2020 5 2":
+            echo $Year2020_Day5Mod_Part2.BinaryBoarding(inputFilePath)
 
         of "2023 1 1":
             echo $Year2023_Day1Mod.Trebuchet(inputFilePath)
