@@ -25,6 +25,9 @@ import Year2023/Year2023_Day5Mod_Part2
 import Year2023/Year2023_Day6Mod
 import Year2023/Year2023_Day6Mod_Part2
 
+import Year2024/Year2024_Day1Mod
+import Year2024/Year2024_Day1Mod_Part2
+
 
 proc getDayInputFile(year: string, day: string): string =
     var retPath = ""
@@ -33,6 +36,9 @@ proc getDayInputFile(year: string, day: string): string =
     retPath
 
 when isMainModule:
+
+    # echo $Year2024_Day1Mod_Part2.HistorianHysteria(getDayInputFile("2024", "1"))
+    # quit()
 
     # There is probably a better way to do all this
     # TODO later on
@@ -62,6 +68,8 @@ when isMainModule:
         "2023 5 2 -> Day 5 2023 Part 1",
         "2023 6 1 -> Day 6 2023 Part 2",
         "2023 6 2 -> Day 6 2023 Part 2",
+        
+        "2024 1 1 -> Day 1 2024 Part 1",
         ]
 
     for af in AVAILABLE_FUNCTIONS_TO_RUN:
@@ -132,6 +140,11 @@ when isMainModule:
             echo $Year2023_Day6Mod.WaitForIt(inputFilePath)
         of "2023 6 2":
             echo $Year2023_Day6Mod_Part2.WaitForIt(inputFilePath)
+        
+        of "2024 1 1":
+            echo $Year2024_Day1Mod.HistorianHysteria(inputFilePath)
+        of "2024 1 2":
+            echo $Year2024_Day1Mod_Part2.HistorianHysteria(inputFilePath)
         else:
             echo "Unknown ID for what to run"
 
