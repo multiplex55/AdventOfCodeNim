@@ -29,6 +29,8 @@ import Year2024/Year2024_Day1Mod
 import Year2024/Year2024_Day1Mod_Part2
 import Year2024/Year2024_Day2Mod
 import Year2024/Year2024_Day2Mod_part2
+import Year2024/Year2024_Day3Mod
+import Year2024/Year2024_Day3Mod_Part2
 
 
 proc getDayInputFile(year: string, day: string): string =
@@ -39,8 +41,8 @@ proc getDayInputFile(year: string, day: string): string =
 
 when isMainModule:
 
-    # echo $Year2024_Day2Mod_Part2.RedNosedReports(getDayInputFile("2024", "2"))
-    # quit()
+    echo $Year2024_Day3Mod_Part2.MullItOver(getDayInputFile("2024", "3"))
+    quit()
 
     # There is probably a better way to do all this
     # TODO later on
@@ -67,14 +69,16 @@ when isMainModule:
         "2023 4 1 -> Day 4 2023 Part 2",
         "2023 4 2 -> Day 4 2023 Part 2",
         "2023 5 1 -> Day 5 2023 Part 1",
-        "2023 5 2 -> Day 5 2023 Part 1",
-        "2023 6 1 -> Day 6 2023 Part 2",
+        "2023 5 2 -> Day 5 2023 Part 2",
+        "2023 6 1 -> Day 6 2023 Part 1",
         "2023 6 2 -> Day 6 2023 Part 2",
         
         "2024 1 1 -> Day 1 2024 Part 1",
         "2024 1 2 -> Day 1 2024 Part 2",
         "2024 2 1 -> Day 2 2024 Part 1",
         "2024 2 2 -> Day 2 2024 Part 2",
+        "2024 3 1 -> Day 3 2024 Part 1",
+        "2024 3 2 -> Day 3 2024 Part 2",
         ]
 
     for af in AVAILABLE_FUNCTIONS_TO_RUN:
@@ -154,6 +158,10 @@ when isMainModule:
             echo $Year2024_Day2Mod.RedNosedReports(inputFilePath)
         of "2024 2 2":
             echo $Year2024_Day2Mod_Part2.RedNosedReports(inputFilePath)
+        of "2024 3 1":
+            echo $Year2024_Day3Mod.MullItOver(inputFilePath)
+        of "2024 3 2":
+            echo $Year2024_Day3Mod_Part2.MullItOver(inputFilePath)
 
         else:
             echo "Unknown ID for what to run"
