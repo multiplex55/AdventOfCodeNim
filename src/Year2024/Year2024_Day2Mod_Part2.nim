@@ -28,13 +28,13 @@ proc evaluateReports(reportsSeq: seq[string]): seq[bool] =
     for report in reportsSeq:
         var 
             reportAsInts:seq[int] = report.split(" ").mapIt(parseInt(it))
-            reportEvalPremutations:seq[bool]
+            reportEvalPermutations:seq[bool]
 
         for i in 0..reportAsInts.len()-1:
             var currentReportWithRemovedElement = reportAsInts
             currentReportWithRemovedElement.delete(i)
-            reportEvalPremutations.add(evaluateReport(currentReportWithRemovedElement))
-        if reportEvalPremutations.countIt(it == true) >= 1:
+            reportEvalPermutations.add(evaluateReport(currentReportWithRemovedElement))
+        if reportEvalPermutations.countIt(it == true) >= 1:
             retSeq.add(true)
         else:
             retSeq.add(false)
@@ -55,8 +55,8 @@ proc getInputFromFile(fileName: string): seq[string] =
 proc RedNosedReports*(fileName: string): int =
     let
         inputSeq: seq[string] = getInputFromFile(fileName) 
-        areReportSafe:seq[bool] = evaluateReports(inputSeq)
-        answer = areReportSafe.countIt(it == true)
+        areReportsSafe:seq[bool] = evaluateReports(inputSeq)
+        answer = areReportsSafe.countIt(it == true)
         
     echo "Answer is " & $answer
     return answer

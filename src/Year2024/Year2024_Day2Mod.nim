@@ -38,8 +38,8 @@ proc getInputFromFile(fileName: string): seq[string] =
 proc RedNosedReports*(fileName: string): int =
     let
         inputSeq: seq[string] = getInputFromFile(fileName) 
-        areReportSafe:seq[bool] = evaluateReports(inputSeq)
-        answer = areReportSafe.countIt(it == true)
+        areReportsSafe:seq[bool] = evaluateReports(inputSeq)
+        answer = areReportsSafe.countIt(it == true)
         
     echo "Answer is " & $answer
     return answer
