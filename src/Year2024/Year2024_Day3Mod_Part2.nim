@@ -21,7 +21,6 @@ proc MullItOver*(fileName: string): int =
 
     for iseq in inputSeq:
         for m in findAll(iseq,re2"(mul\([[:digit:]]+,[[:digit:]]+\))|(don't)|(do)"):
-            echo m
             for g in 0..m.groupsCount-1:
                 if m.group(g).allIt(it > 0):
                     captures.add(iseq[m.group(g)])
