@@ -1,7 +1,8 @@
 #https://adventofcode.com/2024/day/4
 import strutils, strformat, streams, os, times, tables, sequtils, sets, algorithm
+import std/[asyncdispatch, threadpool]
 
-proc validateIndexForInput(inputSeq: seq[string], potentialIndexes: seq[(int, int)]): int =
+proc validateIndexForInput(inputSeq: seq[string], potentialIndexes: seq[(int, int)]): int {.thread.} =
     var answer: int
     var outOfBounds = false
     if potentialIndexes.countIt(it[0] < 0) > 0 or
@@ -27,7 +28,7 @@ proc validateIndexForInput(inputSeq: seq[string], potentialIndexes: seq[(int, in
                 bottomRight != 'A') and (topLeft != 'X') and (topRight !=
                         'X') and (bottomLeft != 'X') and (bottomRight != 'X'):
             answer += 1
-            echo &"{topLeft=} {bottomRight=} {topRight=} {bottomLeft=}"
+            # echo &"{topLeft=} {bottomRight=} {topRight=} {bottomLeft=}"
     answer
 
 proc getInputFromFile(fileName: string): seq[string] =
@@ -46,6 +47,7 @@ proc CeresSearch*(fileName: string): int =
         inputSeq: seq[string] = getInputFromFile(fileName)
     var
         answer = 0
+        futures: seq[FlowVar[int]]
 
     for row, iseq in inputSeq:
         for col in 0..iseq.len()-1:
@@ -57,7 +59,8 @@ proc CeresSearch*(fileName: string): int =
             potentialIndexes.add((row-1, col+1)) # Top Right
             potentialIndexes.add((row+1, col-1)) # Bottom Left
             potentialIndexes.add((row+1, col+1)) # Bottom Right
-            answer += validateIndexForInput(inputSeq, potentialIndexes)
-
+            futures.add(spawn validateIndexForInput(inputSeq, potentialIndexes))
+    for future in futures:
+        answer += ^future
     echo "Answer is " & $answer
     return answer
