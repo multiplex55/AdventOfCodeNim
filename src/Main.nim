@@ -35,6 +35,8 @@ import Year2024/Year2024_Day4Mod
 import Year2024/Year2024_Day4Mod_Part2
 import Year2024/Year2024_Day5Mod
 import Year2024/Year2024_Day5Mod_Part2
+import Year2024/Year2024_Day6Mod
+import Year2024/Year2024_Day6Mod_Part2
 
 
 proc getDayInputFile(year: string, day: string): string =
@@ -45,8 +47,8 @@ proc getDayInputFile(year: string, day: string): string =
 
 when isMainModule:
 
-    # echo $Year2024_Day5Mod.PrintQueue(getDayInputFile("2024", "5"))
-    # echo $Year2024_Day5Mod_Part2.PrintQueue(getDayInputFile("2024", "5"))
+    # echo $Year2024_Day6Mod.GuardGallivant(getDayInputFile("2024", "6"))
+    # echo $Year2024_Day6Mod_Part2.GuardGallivant(getDayInputFile("2024", "6"))
     # quit()
 
     # There is probably a better way to do all this
@@ -88,6 +90,8 @@ when isMainModule:
         "2024 4 2 -> Day 4 2024 Part 2", 
         "2024 5 1 -> Day 5 2024 Part 1",
         "2024 5 2 -> Day 5 2024 Part 2",
+        "2024 6 1 -> Day 6 2024 Part 1",
+        "2024 6 2 -> Day 6 2024 Part 2",
         ]
 
     for af in AVAILABLE_FUNCTIONS_TO_RUN:
@@ -179,6 +183,10 @@ when isMainModule:
             echo $Year2024_Day5Mod.PrintQueue(inputFilePath)
         of "2024 5 2":
             echo $Year2024_Day5Mod_Part2.PrintQueue(inputFilePath)
+        of "2024 6 1":
+            echo $Year2024_Day6Mod.GuardGallivant(inputFilePath)
+        of "2024 6 2":
+            echo $Year2024_Day6Mod_Part2.GuardGallivant(inputFilePath)
 
         else:
             echo "Unknown ID for what to run"
