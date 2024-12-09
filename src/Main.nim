@@ -37,6 +37,8 @@ import Year2024/Year2024_Day5Mod
 import Year2024/Year2024_Day5Mod_Part2
 import Year2024/Year2024_Day6Mod
 import Year2024/Year2024_Day6Mod_Part2
+import Year2024/Year2024_Day7Mod
+import Year2024/Year2024_Day7Mod_Part2
 
 
 proc getDayInputFile(year: string, day: string): string =
@@ -47,8 +49,8 @@ proc getDayInputFile(year: string, day: string): string =
 
 when isMainModule:
 
-    # echo $Year2024_Day6Mod.GuardGallivant(getDayInputFile("2024", "6"))
-    # echo $Year2024_Day6Mod_Part2.GuardGallivant(getDayInputFile("2024", "6"))
+    # echo $Year2024_Day7Mod.BridgeRepair(getDayInputFile("2024", "7"))
+    # echo $Year2024_Day7Mod_Part2.BridgeRepair(getDayInputFile("2024", "7"))
     # quit()
 
     # There is probably a better way to do all this
