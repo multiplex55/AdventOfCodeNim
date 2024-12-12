@@ -80,8 +80,49 @@ proc runAndBenchmark(inputString: string) =
     echo "CPU Time: ", endTimeCPU - startTimeCPU
     echo "Duration: ", endTimeDT - startTimeDT
 
+proc createDayFileTemplate(dayPath:string)=
+    echo "TODO Create Day File Template"
+
+proc createDayTemplate(inputString: string) =
+    # TODO THIS IS ALL IN DEV STILL
+    let (year, day, part) = parseRunCommand(inputString)
+
+    # Create src Folder if it doesn't exist
+    let yearFolderSource= &"src\\Year{year}" 
+    if not dirExists(yearFolderSource):
+        createDir(yearFolderSource)
+        echo &"Created folder {yearFolderSource=}"
+
+    # Create Part 1 and Part 2 src files
+    var 
+        part1File = &"{yearFolderSource}\\Year{year}_Day{day}.nim"
+        part2File = &"{yearFolderSource}\\Year{year}_Day{day}_Part2.nim"
+
+    # TODO Create Template File
+    if not fileExists(part1File):
+        writeFile(part1File, "")  
+        echo &"Created {part1File=}"
+    
+    if not fileExists(part2File):
+        writeFile(part2File, "")  
+        echo &"Created {part2File=}"
+
+    # Create input folder
+    let yearFolderInputFiles = &"InputFiles\\{year}" 
+    if not dirExists(yearFolderInputFiles):
+        createDir(yearFolderInputFiles)
+        echo &"Created Folder {yearFolderInputFiles=}"
+    
+    var inputFile = &"{yearFolderInputFiles}\\day{day}.txt"
+    if not fileExists(inputFile):
+        writeFile(inputFile, "")  
+
+    # Create input file if
+
 when isMainModule:
     try:
+        createDayTemplate("2069 1 0")
+        quit()
         let enableHardcode = true
         if enableHardcode:
             runAndBenchmark("2024 7 1")
