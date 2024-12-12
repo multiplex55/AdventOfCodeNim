@@ -31,3 +31,7 @@ proc MullItOver*(fileName: string): int =
 
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo MullItOver(paramStr(1))

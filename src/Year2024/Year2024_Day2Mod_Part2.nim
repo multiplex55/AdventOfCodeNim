@@ -60,3 +60,7 @@ proc RedNosedReports*(fileName: string): int =
         
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo RedNosedReports(paramStr(1))

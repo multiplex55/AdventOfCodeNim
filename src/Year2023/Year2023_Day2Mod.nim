@@ -40,3 +40,7 @@ proc CubeConundrum*(fileName: string): int =
 
     defer: fileStrm.close()
     return sum
+
+when isMainModule:
+    if paramCount() == 1:
+        echo CubeConundrum(paramStr(1))

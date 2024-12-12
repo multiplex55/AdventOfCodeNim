@@ -1,201 +1,102 @@
-import strutils, strformat, streams, os, times, tables, sequtils, algorithm, terminal
-import Year2020/Year2020_Day1Mod
-import Year2020/Year2020_Day1Mod_Part2
-import Year2020/Year2020_Day2Mod
-import Year2020/Year2020_Day2Mod_Part2
-import Year2020/Year2020_Day3Mod
-import Year2020/Year2020_Day3Mod_Part2
-import Year2020/Year2020_Day4Mod
-import Year2020/Year2020_Day4Mod_Part2
-import Year2020/Year2020_Day5Mod
-import Year2020/Year2020_Day5Mod_Part2
-import Year2020/Year2020_Day6Mod
-import Year2020/Year2020_Day6Mod_Part2
+import std/[strutils,strformat,streams,os,osproc,times,tables,sequtils,algorithm,terminal,cmdline,
+    compilesettings,dynlib
+    ]
 
-import Year2023/Year2023_Day1Mod
-import Year2023/Year2023_Day1Mod_Part2
-import Year2023/Year2023_Day2Mod
-import Year2023/Year2023_Day2Mod_Part2
-import Year2023/Year2023_Day3Mod
-import Year2023/Year2023_Day3Mod_Part2
-import Year2023/Year2023_Day4Mod
-import Year2023/Year2023_Day4Mod_Part2
-import Year2023/Year2023_Day5Mod
-import Year2023/Year2023_Day5Mod_Part2
-import Year2023/Year2023_Day6Mod
-import Year2023/Year2023_Day6Mod_Part2
+# Utility to get input file path
+proc getDayInputFile*(year: string, day: string): string =
+    &"{os.getcurrentdir()}\\inputFiles\\{year}\\day{day}.txt"
 
-import Year2024/Year2024_Day1Mod
-import Year2024/Year2024_Day1Mod_Part2
-import Year2024/Year2024_Day2Mod
-import Year2024/Year2024_Day2Mod_part2
-import Year2024/Year2024_Day3Mod
-import Year2024/Year2024_Day3Mod_Part2
-import Year2024/Year2024_Day4Mod
-import Year2024/Year2024_Day4Mod_Part2
-import Year2024/Year2024_Day5Mod
-import Year2024/Year2024_Day5Mod_Part2
-import Year2024/Year2024_Day6Mod
-import Year2024/Year2024_Day6Mod_Part2
-import Year2024/Year2024_Day7Mod
-import Year2024/Year2024_Day7Mod_Part2
+# Dynamically compile and load a Nim module
+proc compileAndLoadModule*(year, day, part: string):string =
+    var
+        moduleName = &"Year{year}_Day{day}Mod"
+    if part == "2":
+        moduleName = &"{moduleName}_Part2"
+    var
+        sourceFile = &"src/Year{year}/{moduleName}.nim"
+        outputDir = getCurrentDir() / "bin"
+        outputExe = outputDir / &"{moduleName}.exe"
+
+    # Ensure output directory exists
+    createDir(outputDir)
+
+    # Compile the specific module
+    let compileCmd = &"nim c -d:release --outDir:{outputDir} {sourceFile}"
+    let res = execProcess(compileCmd)
+    echo res
+    return outputExe
 
 
-proc getDayInputFile(year: string, day: string): string =
-    var retPath = ""
+proc executeWithRedirection(exePath: string, inputFile: string, outputFileName = "output_debug.txt") =
+    
+    # let shellCommand = "cmd /C " & exePath & " " & inputFile & " >> " & outputFileName & " 2>&1"
+    let shellCommand = &"cmd /C {exePath} {inputFile} > {outputFileName} 2>&1"
+    echo "Executing command: " & shellCommand
+    
+    # Ensure that the output file is writable and accessible
+    if not fileExists(outputFileName):
+        echo "Creating output file test.txt at: " & outputFileName
+        writeFile(outputFileName, "")  # Create an empty file if it doesn't exist
+    
+    # Execute the command through cmd.exe (shell)
+    let result = execCmdEx(shellCommand)
+    
+    echo "Execution result: ", result.output
+    echo "Exit code: ", result.exitCode
+    
+    if result.exitCode != 0:
+        echo "Error executing the command."
+    else:
+        echo "Command executed successfully, output redirected to test.txt"
 
-    retPath = &"{os.getcurrentdir()}\\inputFiles\\{year}\\day{day}.txt"
-    retPath
+# Main command processor
+proc runAdventCommand*(year, day, part: string): string =
+    let
+        inputFile = getDayInputFile(year, day)
+    let exePath = compileAndLoadModule(year, day, part)
+    echo &"{exePath=}"
+    echo &"{inputFile=}"
+    executeWithRedirection(exePath, inputFile)
+
+# Command line argument parsing
+proc parseRunCommand*(input: string): tuple[year, day, part: string] =
+    let splitInput = input.split(" ")
+    if splitInput.len != 3:
+        raise newException(ValueError, "Invalid input format. Use 'YEAR DAY PART'")
+
+    result = (
+        year: splitInput[0],
+        day: splitInput[1],
+        part: splitInput[2]
+    )
+
+proc runAndBenchmark(inputString: string) =
+    let startTimeCPU = cpuTime()
+    let startTimeDT = now()
+
+    let (year, day, part) = parseRunCommand(inputString)
+    let result = runAdventCommand(year, day, part)
+    echo result
+
+    let endTimeCPU = cpuTime()
+    let endTimeDT = now()
+    echo "CPU Time: ", endTimeCPU - startTimeCPU
+    echo "Duration: ", endTimeDT - startTimeDT
 
 when isMainModule:
-
-    # echo $Year2024_Day7Mod.BridgeRepair(getDayInputFile("2024", "7"))
-    # echo $Year2024_Day7Mod_Part2.BridgeRepair(getDayInputFile("2024", "7"))
-    # quit()
-
-    # There is probably a better way to do all this
-    # TODO later on
-    echo "Which function do you want to run?\n"
-    var AVAILABLE_FUNCTIONS_TO_RUN = @[
-        "2020 1 1 -> Day 1 2020 Part 1",
-        "2020 1 2 -> Day 1 2020 Part 2",
-        "2020 2 1 -> Day 2 2020 Part 1",
-        "2020 2 2 -> Day 2 2020 Part 2",
-        "2020 3 1 -> Day 3 2020 Part 1",
-        "2020 3 2 -> Day 3 2020 Part 2",
-        "2020 4 1 -> Day 4 2020 Part 1",
-        "2020 4 2 -> Day 4 2020 Part 2",
-        "2020 5 1 -> Day 5 2020 Part 1",
-        "2020 5 2 -> Day 5 2020 Part 2",
-        "2020 6 1 -> Day 6 2020 Part 1",
-
-        "2023 1 1 -> Day 1 2023 Part 1",
-        "2023 1 2 -> Day 1 2023 Part 2",
-        "2023 2 1 -> Day 2 2023 Part 1",
-        "2023 2 2 -> Day 2 2023 Part 2",
-        "2023 3 1 -> Day 3 2023 Part 1",
-        "2023 3 2 -> Day 3 2023 Part 2",
-        "2023 4 1 -> Day 4 2023 Part 2",
-        "2023 4 2 -> Day 4 2023 Part 2",
-        "2023 5 1 -> Day 5 2023 Part 1",
-        "2023 5 2 -> Day 5 2023 Part 2",
-        "2023 6 1 -> Day 6 2023 Part 1",
-        "2023 6 2 -> Day 6 2023 Part 2",
-        
-        "2024 1 1 -> Day 1 2024 Part 1",
-        "2024 1 2 -> Day 1 2024 Part 2",
-        "2024 2 1 -> Day 2 2024 Part 1",
-        "2024 2 2 -> Day 2 2024 Part 2",
-        "2024 3 1 -> Day 3 2024 Part 1",
-        "2024 3 2 -> Day 3 2024 Part 2",        
-        "2024 4 1 -> Day 4 2024 Part 1",
-        "2024 4 2 -> Day 4 2024 Part 2", 
-        "2024 5 1 -> Day 5 2024 Part 1",
-        "2024 5 2 -> Day 5 2024 Part 2",
-        "2024 6 1 -> Day 6 2024 Part 1",
-        "2024 6 2 -> Day 6 2024 Part 2",
-        ]
-
-    for af in AVAILABLE_FUNCTIONS_TO_RUN:
-        echo af
-
-    echo "----------------\n\r\nEnter ID:"
-
-    var consoleInput = readline(stdin)
-    echo consoleInput
-
-    var
-        splitInput = consoleInput.split(" ").toSeq()
-        yearInput = splitInput[0]
-        dayInput = splitInput[1]
-        partInput = splitInput[2]
-        inputFilePath = getDayInputFile(yearInput, dayInput)
-
-    var startTimeCPU = cpuTime()
-    var startTimeDT = now()
-
-    case consoleInput:
-        of "2020 1 1":
-            echo $Year2020_Day1Mod.ReportRepair(inputFilePath)
-        of "2020 1 2":
-            echo $Year2020_Day1Mod_Part2.ReportRepair(inputFilePath)
-        of "2020 2 1":
-            echo $Year2020_Day2Mod.PasswordPhilosphy(inputFilePath)
-        of "2020 2 2":
-            echo $Year2020_Day2Mod_Part2.PasswordPhilosphy(inputFilePath)
-        of "2020 3 1":
-            echo $Year2020_Day3Mod.TobogganTrajectory(inputFilePath)
-        of "2020 3 2":
-            echo $Year2020_Day3Mod_Part2.TobogganTrajectory(inputFilePath)
-        of "2020 4 1":
-            echo $Year2020_Day4Mod.PassportProcessing(inputFilePath)
-        of "2020 4 2":
-            echo $Year2020_Day4Mod_Part2.PassportProcessing(inputFilePath)
-        of "2020 5 1":
-            echo $Year2020_Day5Mod.BinaryBoarding(inputFilePath)
-        of "2020 5 2":
-            echo $Year2020_Day5Mod_Part2.BinaryBoarding(inputFilePath)
-        of "2020 6 1":
-            echo $Year2020_Day6Mod.CustomCustoms(inputFilePath)
-        of "2020 6 2":
-            echo $Year2020_Day6Mod_Part2.CustomCustoms(inputFilePath)
-
-        of "2023 1 1":
-            echo $Year2023_Day1Mod.Trebuchet(inputFilePath)
-        of "2023 1 2":
-            echo $Year2023_Day1Mod_Part2.Trebuchet(inputFilePath)
-        of "2023 2 1":
-            echo $Year2023_Day2Mod.CubeConundrum(inputFilePath)
-        of "2023 2 2":
-            echo $Year2023_Day2Mod_Part2.CubeConundrum(inputFilePath)
-        of "2023 3 1":
-            echo $Year2023_Day3Mod.GearRatio(inputFilePath)
-        of "2023 3 2":
-            echo $Year2023_Day3Mod_Part2.GearRatio(inputFilePath)
-        of "2023 4 1":
-            echo $Year2023_Day4Mod.Scratchcards(inputFilePath)
-        of "2023 4 2":
-            echo $Year2023_Day4Mod_Part2.Scratchcards(inputFilePath)
-        of "2023 5 1":
-            echo $Year2023_Day5Mod.IfYouGiveASeedAFertilizer(inputFilePath)
-        of "2023 5 2":
-            echo $Year2023_Day5Mod_Part2.IfYouGiveASeedAFertilizer(inputFilePath)
-        of "2023 6 1":
-            echo $Year2023_Day6Mod.WaitForIt(inputFilePath)
-        of "2023 6 2":
-            echo $Year2023_Day6Mod_Part2.WaitForIt(inputFilePath)
-        
-        of "2024 1 1":
-            echo $Year2024_Day1Mod.HistorianHysteria(inputFilePath)
-        of "2024 1 2":
-            echo $Year2024_Day1Mod_Part2.HistorianHysteria(inputFilePath)
-        of "2024 2 1":
-            echo $Year2024_Day2Mod.RedNosedReports(inputFilePath)
-        of "2024 2 2":
-            echo $Year2024_Day2Mod_Part2.RedNosedReports(inputFilePath)
-        of "2024 3 1":
-            echo $Year2024_Day3Mod.MullItOver(inputFilePath)
-        of "2024 3 2":
-            echo $Year2024_Day3Mod_Part2.MullItOver(inputFilePath)
-        of "2024 4 1":
-            echo $Year2024_Day4Mod.CeresSearch(inputFilePath)
-        of "2024 4 2":
-            echo $Year2024_Day4Mod_Part2.CeresSearch(inputFilePath)
-        of "2024 5 1":
-            echo $Year2024_Day5Mod.PrintQueue(inputFilePath)
-        of "2024 5 2":
-            echo $Year2024_Day5Mod_Part2.PrintQueue(inputFilePath)
-        of "2024 6 1":
-            echo $Year2024_Day6Mod.GuardGallivant(inputFilePath)
-        of "2024 6 2":
-            echo $Year2024_Day6Mod_Part2.GuardGallivant(inputFilePath)
-
+    try:
+        let enableHardcode = true
+        if enableHardcode:
+            runAndBenchmark("2024 7 1")
         else:
-            echo "Unknown ID for what to run"
+            if commandLineParams().len == 0:
+                echo "Available Functions:"
+                echo "----------------\n\r\nEnter ID:"
+                let consoleInput = readline(stdin)
+                runAndBenchmark(consoleInput)
+            else:
+                runAndBenchmark(commandLineParams()[0])
 
-    var endTimeCPU = cpuTime()
-    var endTimeDT = now()
-
-    echo endTimeCPU - startTimeCPU
-    echo endTimeDT - startTimeDT
-
+    except:
+        let e = getCurrentException()
+        echo "Error: ", e.msg

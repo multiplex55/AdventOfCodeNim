@@ -1,3 +1,4 @@
+#https://adventofcode.com/2023/day/5 
 import strutils, strformat, streams, os, times, tables, sequtils, sets
 
 # Apply mapping directly to a seed number if it hasn't been transformed by the current line index before.
@@ -55,3 +56,7 @@ proc IfYouGiveASeedAFertilizer*(fileName: string): int =
     if seedList.len > 0:
         lowestSeedNumber = seedList.min()
     return lowestSeedNumber
+
+when isMainModule:
+    if paramCount() == 1:
+        echo IfYouGiveASeedAFertilizer(paramStr(1))

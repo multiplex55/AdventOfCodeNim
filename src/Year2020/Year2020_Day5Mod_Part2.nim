@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/5
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
 proc calculateSeatID(column: int, row: int): int =
@@ -98,3 +99,7 @@ proc BinaryBoarding*(fileName: string): int =
         answer: int = calculateAnwerFromSeatIds(allSeatIds)
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo BinaryBoarding(paramStr(1))

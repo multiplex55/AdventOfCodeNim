@@ -44,3 +44,7 @@ proc TableContainsKeyParseInt*(tableToSearch: Table[string, int],
             # echo &"This key {key} contains the number? {stringToFind}"
             return value
     return 0
+
+when isMainModule:
+    if paramCount() == 1:
+        echo Trebuchet(paramStr(1))

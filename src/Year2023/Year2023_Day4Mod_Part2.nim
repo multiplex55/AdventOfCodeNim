@@ -88,3 +88,6 @@ proc ScratchCards*(fileName: string): int =
 
     return dupedSequence.len() + ogSequenceLength
 
+when isMainModule:
+    if paramCount() == 1:
+        echo ScratchCards(paramStr(1))

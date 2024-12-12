@@ -77,4 +77,6 @@ proc Trebuchet*(fileName: string): int =
     return sum
 
 
-#### Archive
+when isMainModule:
+    if paramCount() == 1:
+        echo Trebuchet(paramStr(1))

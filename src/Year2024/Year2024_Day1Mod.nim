@@ -46,3 +46,7 @@ proc HistorianHysteria*(fileName: string): int =
     let answer = differenceBetweenSequence.foldl(a + b)
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo HistorianHysteria(paramStr(1))

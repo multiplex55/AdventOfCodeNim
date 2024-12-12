@@ -1,3 +1,4 @@
+#https://adventofcode.com/2024/day/6
 import strutils, strformat, streams, os, times, sequtils, algorithm, sets
 import std/[asyncdispatch, threadpool]
 
@@ -183,3 +184,8 @@ proc GuardGallivant*(fileName: string): int =
         loopPositions += ^future  
     echo "Number of positions that would trap the guard: ", loopPositions
     return loopPositions
+
+
+when isMainModule:
+    if paramCount() == 1:
+        echo GuardGallivant(paramStr(1))

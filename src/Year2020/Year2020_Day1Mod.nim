@@ -1,6 +1,7 @@
+# https://adventofcode.com/2020/day/1
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm
 
-proc ReportRepair*(fileName: string) :int =
+proc ReportRepair*(fileName: string) =
     var 
         sum: int
         fileStrm = openfilestream(fileName, fmRead)
@@ -13,8 +14,11 @@ proc ReportRepair*(fileName: string) :int =
 
     for i in 0 .. inputSeq.len():
         for j in i+1 .. inputSeq.len()-1:
-            #echo &"i {i}: {inputseq[i]} j {j}: {inputseq[j]}"
+            echo &"i {i}: {inputseq[i]} j {j}: {inputseq[j]}"
             if inputseq[i] + inputseq[j] == 2020:
                 sum += inputseq[i] * inputseq[j]
-    return sum 
+    echo &"2020 day 1 {sum=}"
 
+when isMainModule:
+    if paramCount() == 1:
+        ReportRepair(paramStr(1))

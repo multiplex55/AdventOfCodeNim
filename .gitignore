@@ -4,5 +4,5 @@ htmldocs/
 DEBUG_OUTPUT.txt
 Main.exe
 output_debug.txt
-InputFiles/
-bin/AdventOfCodeNim.exe
+InputFiles/*
+bin/*.exe

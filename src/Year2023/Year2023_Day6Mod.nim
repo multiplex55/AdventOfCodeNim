@@ -39,3 +39,7 @@ proc WaitForIt*(fileName: string): int =
     var res = foldl(raceWins,a * b) 
 
     return res 
+
+when isMainModule:
+    if paramCount() == 1:
+        echo WaitForIt(paramStr(1))

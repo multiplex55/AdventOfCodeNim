@@ -37,3 +37,7 @@ proc WaitForIt*(fileName: string): int =
             raceWins += 1
 
     return raceWins
+
+when isMainModule:
+    if paramCount() == 1:
+        echo WaitForIt(paramStr(1))

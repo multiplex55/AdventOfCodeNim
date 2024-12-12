@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/6
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
 func groupInputSequenceByBlank(inputSeq: seq[string]): seq[string] =
@@ -40,3 +41,7 @@ proc CustomCustoms*(fileName: string): int =
 
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo CustomCustoms(paramStr(1))

@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/3
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm, math
 
 proc TobogganTrajectory*(fileName: string): int =
@@ -35,3 +36,6 @@ proc TobogganTrajectory*(fileName: string): int =
     echo "Answer is " & $answer
     return answer
 
+when isMainModule:
+    if paramCount() == 1:
+        echo TobogganTrajectory(paramStr(1))

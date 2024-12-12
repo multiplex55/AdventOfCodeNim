@@ -1,3 +1,4 @@
+#https://adventofcode.com/2024/day/7
 import strutils, strformat, streams, os, times, sequtils, algorithm, sets, bigints
 import std/[asyncdispatch, threadpool]
 
@@ -103,3 +104,7 @@ proc BridgeRepair*(fileName: string): BigInt =
     var answers = validEquations.foldl(a + b)
     echo &"Final Calibration Result: {answers}"
     answers
+
+when isMainModule:
+    if paramCount() == 1:
+        echo BridgeRepair(paramStr(1))

@@ -45,3 +45,7 @@ proc PrintQueue*(fileName: string): int =
 
     let answer = validMiddlePages.foldl(a + b)
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo PrintQueue(paramStr(1))

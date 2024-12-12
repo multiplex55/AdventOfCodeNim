@@ -1,3 +1,4 @@
+#https://adventofcode.com/2024/day/6
 import strutils, strformat, streams, os, times, sequtils, algorithm
 
 # Update grid dynamically, only modifying affected cells
@@ -51,9 +52,9 @@ proc GuardGallivant*(fileName: string): int =
     while inBounds(guardPos):
         updateGrid(grid, guardPos, prevGuardPos, visited, currentDir, dirSymbols)
 
-        # for line in grid:
-        #     echo line.join("")
-        # echo ""
+        for line in grid:
+            echo line.join("")
+        echo ""
 
         # Determine the next position based on the current direction
         let nextPos = (guardPos[0] + directions[currentDir][0], guardPos[1] + directions[currentDir][1])
@@ -72,3 +73,7 @@ proc GuardGallivant*(fileName: string): int =
 
     echo visited.len
     return visited.len
+
+when isMainModule:
+    if paramCount() == 1:
+        echo GuardGallivant(paramStr(1))

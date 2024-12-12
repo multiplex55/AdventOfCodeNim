@@ -291,3 +291,6 @@ proc GearRatio*(fileName: string): int =
         echo fs
     return sum
 
+when isMainModule:
+    if paramCount() == 1:
+        echo GearRatio(paramStr(1))

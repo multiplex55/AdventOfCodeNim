@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/2
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm
 
 proc PasswordPhilosphy*(fileName: string): int =
@@ -43,3 +44,6 @@ proc PasswordPhilosphy*(fileName: string): int =
 
     return sum
 
+when isMainModule:
+    if paramCount() == 1:
+        echo PasswordPhilosphy(paramStr(1))

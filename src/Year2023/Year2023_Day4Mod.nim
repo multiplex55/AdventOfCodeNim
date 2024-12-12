@@ -53,3 +53,6 @@ proc ScratchCards*(fileName: string): int =
 
     return sum
 
+when isMainModule:
+    if paramCount() == 1:
+        echo ScratchCards(paramStr(1))

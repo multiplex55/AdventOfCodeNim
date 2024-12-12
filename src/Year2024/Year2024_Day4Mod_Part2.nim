@@ -64,3 +64,7 @@ proc CeresSearch*(fileName: string): int =
         answer += ^future
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo CeresSearch(paramStr(1))

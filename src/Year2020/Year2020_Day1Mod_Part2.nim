@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/1
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm
 
 proc ReportRepair*(fileName: string) :int =
@@ -14,9 +15,12 @@ proc ReportRepair*(fileName: string) :int =
     for i in 0 .. inputSeq.len():
         for j in i+1 .. inputSeq.len()-1:
             for k in j+1 .. inputSeq.len()-1:
-                #echo &"i {i}: {inputseq[i]} j {j}: {inputseq[j]} k {k}: {inputseq[k]}"
+                echo &"i {i}: {inputseq[i]} j {j}: {inputseq[j]} k {k}: {inputseq[k]}"
                 if inputseq[i] + inputseq[j] + inputseq[k] == 2020:
                     echo &"{inputseq[i]} {inputseq[j]} {inputseq[k]}"
                     sum += inputseq[i] * inputseq[j] * inputseq[k]
     return sum 
 
+when isMainModule:
+    if paramCount() == 1:
+        echo ReportRepair(paramStr(1))

@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/4
 import strutils, strformat, streams, os, times, tables, sequtils, algorithm,
         math
 import regex
@@ -132,3 +133,7 @@ proc PassportProcessing*(fileName: string): int =
 
     echo "Answer is " & $answer
     return answer
+
+when isMainModule:
+    if paramCount() == 1:
+        echo PassportProcessing(paramStr(1))

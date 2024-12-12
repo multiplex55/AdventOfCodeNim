@@ -1,3 +1,4 @@
+#https://adventofcode.com/2024/day/4
 import strutils, strformat, streams, os, times, sequtils, algorithm
 
 proc parseRules(rules: seq[string]): seq[(int, int)] =
@@ -55,6 +56,8 @@ proc PrintQueue*(fileName: string): int =
 
     return middlePages.foldl(a + b)
 
-
+when isMainModule:
+    if paramCount() == 1:
+        echo PrintQueue(paramStr(1))
 
 

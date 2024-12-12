@@ -79,3 +79,7 @@ proc processSeedRangesParallel(seedRanges: seq[tuple[start: int, length: int]],
 proc IfYouGiveASeedAFertilizer*(fileName: string): int =
   let (seedRanges, maps) = loadMappings(fileName)
   result = processSeedRangesParallel(seedRanges, maps)
+
+when isMainModule:
+    if paramCount() == 1:
+        echo IfYouGiveASeedAFertilizer(paramStr(1))
