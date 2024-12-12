@@ -1,13 +1,11 @@
 import std/[strutils,strformat,streams,os,osproc,times,tables,sequtils,algorithm,terminal,cmdline,
-    compilesettings,dynlib
-    ]
+    compilesettings,dynlib]
 
 # Utility to get input file path
 proc getDayInputFile*(year: string, day: string): string =
     &"{os.getcurrentdir()}\\inputFiles\\{year}\\day{day}.txt"
 
-# Dynamically compile and load a Nim module
-proc compileAndLoadModule*(year, day, part: string):string =
+proc compileModule*(year, day, part: string):string =
     var
         moduleName = &"Year{year}_Day{day}Mod"
     if part == "2":
@@ -25,7 +23,6 @@ proc compileAndLoadModule*(year, day, part: string):string =
     let res = execProcess(compileCmd)
     echo res
     return outputExe
-
 
 proc executeWithRedirection(exePath: string, inputFile: string, outputFileName = "output_debug.txt") =
     
@@ -53,7 +50,7 @@ proc executeWithRedirection(exePath: string, inputFile: string, outputFileName =
 proc runAdventCommand*(year, day, part: string): string =
     let
         inputFile = getDayInputFile(year, day)
-    let exePath = compileAndLoadModule(year, day, part)
+    let exePath = compileModule(year, day, part)
     echo &"{exePath=}"
     echo &"{inputFile=}"
     executeWithRedirection(exePath, inputFile)
