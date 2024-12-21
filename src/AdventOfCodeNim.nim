@@ -44,7 +44,7 @@ proc executeWithRedirection(exePath: string, inputFile: string, outputFileName =
     if result.exitCode != 0:
         echo "Error executing the command."
     else:
-        echo "Command executed successfully, output redirected to test.txt"
+        echo &"Command executed successfully, output redirected to {outputFileName}.txt"
 
 # Main command processor
 proc runAdventCommand*(year, day, part: string): string =
@@ -125,7 +125,7 @@ when isMainModule:
         quit()
         let enableHardcode = true
         if enableHardcode:
-            runAndBenchmark("2024 7 1")
+            runAndBenchmark("2020 4 2")
         else:
             if commandLineParams().len == 0:
                 echo "Available Functions:"
